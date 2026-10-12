@@ -346,7 +346,9 @@ class Task(MorgenModel):
     estimated_duration: Annotated[str | None, Field(alias="estimatedDuration")] = None
     priority: int | None = None
     progress: str | None = None
-    position: float | None = None
+    # Creation time in epoch ms until reordered by hand, which can make it
+    # fractional (#3). `int | float` keeps integers from rendering as `N.0`.
+    position: int | float | None = None
     related_to: Annotated[dict[str, TaskRelation] | None, Field(alias="relatedTo")] = (
         None
     )
